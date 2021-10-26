@@ -126,6 +126,7 @@ export default {
     Redirect(){
       this.$router.push('/');
       this.select = false;
+      this.$store.state.tempoMedio = 0;
     }
   },
 };

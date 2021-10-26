@@ -65,14 +65,16 @@ export default Vue.extend({
 
         this.cron = setInterval(() => { this.timer(); }, 10);
       } else {
-        this.playerIcon = 'mdi-play';
-        clearInterval(this.cron);
-        this.$router.push('/timer');
-        this.$store.state.time = `${this.hh}:${this.mm}:${this.ss}`;
-        this.hh = 0;
-        this.mm = 0;
-        this.ss = 0;
-        this.ms = 0;
+        if (this.$store.state.tempoMedio != 0){
+          this.playerIcon = 'mdi-play';
+          clearInterval(this.cron);
+          this.$router.push('/timer');
+          this.$store.state.time = `${this.hh}:${this.mm}:${this.ss}`;
+          this.hh = 0;
+          this.mm = 0;
+          this.ss = 0;
+          this.ms = 0;
+        }
       }
     },
     timer() {
