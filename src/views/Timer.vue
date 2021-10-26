@@ -103,6 +103,7 @@ export default {
           this.FunCalc = calculo(Number(this.quantPersons), Number(this.quantAttendant), this.$store.state.tempoMedio);
 
           this.select = true;
+          this.check = false;
           this.margin = 15;
           this.textBurron = "Calcular Novamente";
         } else { 
@@ -114,7 +115,12 @@ export default {
             this.TimeCheck = true;
             this.textBurron = "Calcular o Tempo Medio"
             this.margin = 8;
-          } else { this.check = true }}
+          } else { 
+            this.check = true;
+            this.margin = 8;
+            this.textBurron = "Calcular";
+            this.select = false;
+          }}
     },
 
     Redirect(){
