@@ -42,9 +42,7 @@
     </v-container>
   </div>
 </template>
-
 <script lang="">
-
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -56,7 +54,7 @@ export default Vue.extend({
       mm: 0,
       ss: 0,
       ms: 0,
-      tempoMedio: 0,
+      time: 0,
       cron: null,
     }),
 
@@ -84,11 +82,32 @@ export default Vue.extend({
         this.ms = 0;
         this.ss += 1;
       }
+
+      if ((this.ss === 15) && (this.ms === 0)) {
+        this.$store.state.tempoMedio += 0.25;
+        console.log(this.$store.state.tempoMedio)
+      }
+
+      if ((this.ss === 30) && (this.ms === 0)) {
+        this.$store.state.tempoMedio += 0.25;
+        console.log(this.$store.state.tempoMedio)
+      }
+
+      if ((this.ss === 45) && (this.ms === 0)) {
+        this.$store.state.tempoMedio += 0.25;
+        console.log(this.$store.state.tempoMedio)
+      }
+
+      if ((this.ss === 59) && (this.ms === 0)) {
+        this.$store.state.tempoMedio += 0.25;
+        console.log(this.$store.state.tempoMedio)
+      }
+
       if (this.ss === 59) {
         this.ss = 0;
         this.mm += 1;
-        this.tempoMedio += 1;
       }
+
       if (this.mm === 59) {
         this.mm = 0;
         this.hh += 0;

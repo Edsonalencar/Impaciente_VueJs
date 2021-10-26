@@ -6,10 +6,11 @@
           cols="12"
         >
           <v-text-field
-            v-model="this.$store.state.time"
+            v-model="$store.state.time"
             label="Tempo Medio por Pessoa"
             outlined
             dark
+            @click="Redirect"
             color="#0099ee"
           ></v-text-field>
         </v-col>
@@ -17,9 +18,9 @@
           cols="12"
         >
           <v-text-field
-            v-model="this.quantPersons"
+            v-model="quantPersons"
             class="mt-n7"
-            label="Pessoas a frente"
+            label="Pessoas a Frente"
             outlined
             placeholder="Ex: 5"
             type="number"
@@ -31,7 +32,7 @@
           cols="12"
         >
           <v-text-field
-            v-model="this.quantAttendant"
+            v-model="quantAttendant"
             class="mt-n7"
             label="Quantidade de Atendentes"
             outlined
@@ -44,21 +45,24 @@
         <v-col cols="12" v-if="this.select" class="ml-n3">
           <ul class="timerOutput">
             <li>
-              <span>2</span>
+              <span>{{ FunCalc.horas }}</span>
               <div>hora(s)</div>
             </li>
             <li>
-              <span>5</span>
+              <span>{{ FunCalc.minutos }}</span>
               <div>min.</div>
             </li>
             <li>
-              <span>26</span>
+              <span>{{ FunCalc.segundos }}</span>
               <div>sec.</div>
             </li>
           </ul>
         </v-col>
         <v-col v-if="this.check" class="Erro">
           <span>Preencha os Campos Acima</span>
+        </v-col>
+        <v-col v-if="this.TimeCheck" class="timeCheckStyle">
+          <span>Veja o Tempo Medio de Espera</span>
         </v-col>
       </v-row>
     </v-container>
@@ -75,30 +79,48 @@
   </div>
 </template>
 <script>
+import calculo from '../utils/calculo.js';
 
 export default {
   name: 'Timer',
   data: () => ({
       select: false,
       check: false,
+      TimeCheck: false,
       quantPersons: "",
       quantAttendant: "",
       textBurron: "Calcular",
       margin: 3,
+      FunCalc: null,
 	}),
   methods: {
     WaitTimeCalc(){
-        if ((this.quantPersons != "") && (this.quantAttendant != "")) {
+        if ((this.quantPersons != "") && (this.quantAttendant != "") && (this.$store.state.tempoMedio != 0)) {
+
           if(this.select){
-            this.$router.push('/');
-            this.select = false;
+            this.Redirect();
           }
-  
+          this.FunCalc = calculo(Number(this.quantPersons), Number(this.quantAttendant), this.$store.state.tempoMedio);
+
           this.select = true;
           this.margin = 15;
           this.textBurron = "Calcular Novamente";
-        } else { this.check = true}
+        } else { 
+          if(this.TimeCheck){
+            this.Redirect();
+          }
+
+          if (this.$store.state.tempoMedio == 0){
+            this.TimeCheck = true;
+            this.textBurron = "Calcular o Tempo Medio"
+            this.margin = 8;
+          } else { this.check = true }}
     },
+
+    Redirect(){
+      this.$router.push('/');
+      this.select = false;
+    }
   },
 };
 </script>
@@ -134,6 +156,14 @@ li {
 
 .Erro span {
   color: rgb(255, 1, 1);
+  font-size: 1.2rem;
+  background: #222121;
+  padding: .6rem;
+  border-radius: .5rem;
+}
+
+.timeCheckStyle span {
+  color: rgb(1, 255, 192);
   font-size: 1.2rem;
   background: #222121;
   padding: .6rem;

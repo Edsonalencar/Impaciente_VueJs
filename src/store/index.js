@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     time: 0,
+    tempoMedio: 0,
   },
   mutations: {
   },
