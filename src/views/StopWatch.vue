@@ -2,11 +2,25 @@
   <div>
     <v-container>
       <v-row class="text-center my-auto">
-        <v-col cols="12" class="mt-10 stopWatch">
-          <span class="count">{{ hh }}</span>
-          <span class="count" id="minute">{{ mm }}</span>
-          <span class="count">{{ ss }}</span>
-          <span class="count milli" id="millesecund">{{ ms }}</span>
+        <v-col cols="12" class="mt-10 ml-n3">
+          <ul class="stopWatch">
+            <li>
+              <span>{{ hh }}</span>
+              <div>hora(s)</div>
+            </li>
+            <li>
+              <span>{{ mm }}</span>
+              <div>min.</div>
+            </li>
+            <li>
+              <span>{{ ss }}</span>
+              <div>sec.</div>
+            </li>
+            <li>
+              <span>{{ ms }}</span>
+              <div>mil sec.</div>
+            </li>
+          </ul>
         </v-col>
         <v-col cols="12">
           <v-btn
@@ -36,16 +50,16 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'Home',
 
-  data() {
-    return {
+  data: () => ({
       playerIcon: 'mdi-play',
       hh: 0,
       mm: 0,
       ss: 0,
       ms: 0,
+      tempoMedio: 0,
       cron: null,
-    };
-  },
+    }),
+
   methods: {
     Start() {
       if (this.playerIcon === 'mdi-play') {
@@ -74,6 +88,7 @@ export default Vue.extend({
       if (this.ss === 59) {
         this.ss = 0;
         this.mm += 1;
+        this.tempoMedio += 1;
       }
       if (this.mm === 59) {
         this.mm = 0;
@@ -84,13 +99,20 @@ export default Vue.extend({
 });
 </script>
 <style>
-.count {
-  font-size: 8rem;
-  color: #09e;
+li {
+  list-style: none;
 }
 
-.stopWatch span{
+.stopWatch {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(2rem, 10rem));
+  justify-content: center;
+  gap: 10px;
+}
+
+.stopWatch li {
   font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
   padding: 1rem;
   color: #09e;
   background: #1e1e1e;
@@ -99,25 +121,25 @@ export default Vue.extend({
   text-align: center;
 }
 
-#minute {
-  margin-left: .5rem;
-  margin-right: .5rem;
+.stopWatch li span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 4rem;
 }
 
-#millesecund {
-  margin-left: .5rem;
-}
 .margin-button {
   margin-top: 8rem;
 }
 
 @media (max-width: 584px) {
-  .count {
-    font-size: 2rem;
-    color: #0099ee;
+  .stopWatch {
+    grid-template-columns: repeat(auto-fit, minmax(2rem, 4.5rem));
   }
-  .margin-button {
-    margin-top: 30vh;
-}
+  .stopWatch li span {
+    font-size: 2.5rem;
+  }
+  .stopWatch li {
+    font-size: .6rem;
+  }
 }
 </style>
