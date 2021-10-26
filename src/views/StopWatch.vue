@@ -71,7 +71,6 @@ export default Vue.extend({
         clearInterval(this.cron);
         this.$router.push('/timer');
         this.$store.state.time = `${this.hh}:${this.mm}:${this.ss}`;
-        this.$store.state.averageTime = this.ss;
         this.hh = 0;
         this.mm = 0;
         this.ss = 0;

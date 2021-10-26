@@ -31,6 +31,7 @@
           cols="12"
         >
           <v-text-field
+            v-model="this.quantAttendant"
             class="mt-n7"
             label="Quantidade de Atendentes"
             outlined
@@ -51,7 +52,7 @@
               <div>min.</div>
             </li>
             <li>
-              <span>20</span>
+              <span>26</span>
               <div>sec.</div>
             </li>
           </ul>
@@ -69,31 +70,34 @@
       large
       @click="WaitTimeCalc"
     >
-      Calcular
+      {{ textBurron }}
     </v-btn>
   </div>
 </template>
 <script>
+
 export default {
   name: 'Timer',
-
   data: () => ({
       select: false,
       check: false,
-      quantPersons: 0,
-      quantAttendant: 0,
+      quantPersons: "",
+      quantAttendant: "",
+      textBurron: "Calcular",
       margin: 3,
-      waitTime: 0,
 	}),
   methods: {
     WaitTimeCalc(){
-        if(this.select){
-          this.$router.push('/');
-          this.select = false;
-        }
+        if ((this.quantPersons != "") && (this.quantAttendant != "")) {
+          if(this.select){
+            this.$router.push('/');
+            this.select = false;
+          }
   
-        this.select = true;
-        this.margin = 15;
+          this.select = true;
+          this.margin = 15;
+          this.textBurron = "Calcular Novamente";
+        } else { this.check = true}
     },
   },
 };
