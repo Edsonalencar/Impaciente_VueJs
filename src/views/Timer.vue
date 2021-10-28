@@ -133,6 +133,7 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 li {
   list-style: none;
 }
@@ -156,7 +157,7 @@ li {
 }
 
 .timerOutput li span {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-size: 2.5rem;
 }
