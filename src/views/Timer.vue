@@ -100,6 +100,9 @@ export default {
           if(this.select){
             this.Redirect();
           }
+          if(this.check){
+            this.Redirect();
+          }
           this.FunCalc = calculo(Number(this.quantPersons), Number(this.quantAttendant), this.$store.state.tempoMedio);
 
           this.select = true;
