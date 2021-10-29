@@ -151,7 +151,19 @@ li {
   margin-top: 8rem;
 }
 
-@media (max-width: 584px) {
+@media (max-width: 716px) {
+  .stopWatch {
+    grid-template-columns: repeat(auto-fit, minmax(2rem, 8rem));
+  }
+}
+
+@media (max-width: 588px) {
+  .stopWatch {
+    grid-template-columns: repeat(auto-fit, minmax(2rem, 6rem));
+  }
+}
+
+@media (max-width: 462px) {
   .stopWatch {
     grid-template-columns: repeat(auto-fit, minmax(2rem, 4.5rem));
   }
@@ -160,6 +172,12 @@ li {
   }
   .stopWatch li {
     font-size: .6rem;
+  }
+}
+
+@media (max-width: 365px) {
+  .stopWatch {
+    grid-template-columns: repeat(auto-fit, minmax(2rem, 7rem));
   }
 }
 </style>
